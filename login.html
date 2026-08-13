@@ -12,7 +12,7 @@
 html{scroll-behavior:smooth}
 body{
   font-family:'Nunito',sans-serif;
-  background:#0d0618;
+  background:#0a0604;
   color:#ede4d4;
   min-height:100vh;
   display:flex;
@@ -22,14 +22,14 @@ body{
   position:relative;
 }
 :root{
-  --indigo-deep:#0d0618;
-  --purple-dark:#1a0a2e;
-  --purple-mid:#2d1854;
-  --purple-light:#4a2080;
-  --blue-vibrant:#4a8fd4;
-  --copper:#d4913d;
-  --copper-light:#e8a94e;
-  --orange:#e8722a;
+  --indigo-deep:#0a0604;
+  --purple-dark:#2a0e08;
+  --purple-mid:#5a1515;
+  --purple-light:#8b1a1a;
+  --blue-vibrant:#d4a017;
+  --copper:#c8961e;
+  --copper-light:#e8c44e;
+  --orange:#c85a1e;
   --warm-white:#ede4d4;
   --cream:#f5ead6;
   --text-muted:rgba(237,228,212,0.6);
@@ -38,19 +38,19 @@ body{
 /* Ripple background */
 .ripple-bg{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0}
 .ripple-bg .ring{position:absolute;border-radius:50%;border:2px solid transparent;animation:rip 8s ease-out infinite}
-.ripple-bg .ring:nth-child(1){width:100px;height:100px;border-color:rgba(212,145,61,0.25);animation-delay:0s}
-.ripple-bg .ring:nth-child(2){width:250px;height:250px;border-color:rgba(74,143,212,0.18);animation-delay:1s}
-.ripple-bg .ring:nth-child(3){width:420px;height:420px;border-color:rgba(74,32,128,0.2);animation-delay:2s}
-.ripple-bg .ring:nth-child(4){width:620px;height:620px;border-color:rgba(212,145,61,0.12);animation-delay:3s}
-.ripple-bg .ring:nth-child(5){width:850px;height:850px;border-color:rgba(74,143,212,0.08);animation-delay:4s}
-.ripple-bg .ring:nth-child(6){width:1100px;height:1100px;border-color:rgba(45,24,84,0.15);animation-delay:5s}
+.ripple-bg .ring:nth-child(1){width:100px;height:100px;border-color:rgba(200,150,30,0.25);animation-delay:0s}
+.ripple-bg .ring:nth-child(2){width:250px;height:250px;border-color:rgba(212,160,23,0.18);animation-delay:1s}
+.ripple-bg .ring:nth-child(3){width:420px;height:420px;border-color:rgba(139,26,26,0.2);animation-delay:2s}
+.ripple-bg .ring:nth-child(4){width:620px;height:620px;border-color:rgba(200,150,30,0.12);animation-delay:3s}
+.ripple-bg .ring:nth-child(5){width:850px;height:850px;border-color:rgba(212,160,23,0.08);animation-delay:4s}
+.ripple-bg .ring:nth-child(6){width:1100px;height:1100px;border-color:rgba(90,21,21,0.15);animation-delay:5s}
 @keyframes rip{0%{transform:scale(0.85);opacity:1;border-width:3px}50%{opacity:0.5}100%{transform:scale(1.5);opacity:0;border-width:1px}}
 
 .login-card{
   position:relative;
   z-index:2;
-  background:rgba(45,24,84,0.4);
-  border:1px solid rgba(212,145,61,0.2);
+  background:rgba(90,21,21,0.4);
+  border:1px solid rgba(200,150,30,0.2);
   border-radius:16px;
   padding:2.5rem 2rem;
   width:min(420px,90vw);
@@ -63,7 +63,7 @@ body{
   color:var(--cream);
   text-align:center;
   margin-bottom:0.3em;
-  text-shadow:2px 2px 0 rgba(45,24,84,0.8);
+  text-shadow:2px 2px 0 rgba(90,21,21,0.8);
 }
 .login-card .sub{
   font-family:'Passion One',sans-serif;
@@ -85,8 +85,8 @@ body{
 .form-group input{
   width:100%;
   padding:0.75rem 1rem;
-  background:rgba(13,6,24,0.6);
-  border:1px solid rgba(212,145,61,0.25);
+  background:rgba(10,6,4,0.6);
+  border:1px solid rgba(200,150,30,0.25);
   border-radius:8px;
   color:var(--cream);
   font-family:'Nunito',sans-serif;
@@ -96,7 +96,7 @@ body{
 }
 .form-group input:focus{
   border-color:var(--copper);
-  box-shadow:0 0 12px rgba(212,145,61,0.15);
+  box-shadow:0 0 12px rgba(200,150,30,0.15);
 }
 .login-btn{
   width:100%;
@@ -112,7 +112,7 @@ body{
   transition:all 0.3s;
   margin-top:0.5rem;
 }
-.login-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,145,61,0.3)}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(200,150,30,0.3)}
 .login-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
 .error-msg{
   color:#e85454;

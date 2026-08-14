@@ -513,12 +513,29 @@ a{color:inherit;text-decoration:none}
   justify-content:center;
   font-size:2rem;
   transition:all 0.3s;
-  overflow:hidden;
+  position:relative;
   animation:drum-pulse 3s ease-in-out infinite;
 }
 .grupo-avatar img{
   width:100%;height:100%;object-fit:cover;border-radius:50%;
 }
+/* Rotating dashed ring — inset negativo lo centra automático */
+.grupo-avatar::after{
+  content:'';
+  position:absolute;
+  inset:-13px;
+  border-radius:50%;
+  border:2px dashed rgba(200,150,30,0.25);
+  animation:spin-ring 25s linear infinite;
+  pointer-events:none;
+}
+@keyframes spin-ring{
+  to{transform:rotate(360deg)}
+}
+/* Alternar dirección y velocidad */
+.grupo-item:nth-child(even) .grupo-avatar::after{animation-direction:reverse}
+.grupo-item:nth-child(3n) .grupo-avatar::after{animation-duration:20s}
+.grupo-item:nth-child(3n+1) .grupo-avatar::after{animation-duration:30s}
 
 /* Stagger pulse delays */
 .grupo-item:nth-child(1) .grupo-avatar{animation-delay:0s}

@@ -705,6 +705,45 @@ footer p{
   to{opacity:1;transform:translateX(-50%) translateY(0)}
 }
 
+
+/* Solidarity banner */
+.solidarity-banner{
+  position:relative;z-index:2;
+  max-width:900px;
+  margin:0 auto;
+  padding:0 1.5rem 3rem;
+}
+.solidarity-inner{
+  background:linear-gradient(135deg, rgba(90,21,21,0.4), rgba(200,150,30,0.1));
+  border:1px solid rgba(200,150,30,0.25);
+  border-radius:14px;
+  padding:2rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.solidarity-inner::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg, transparent, var(--copper), transparent);
+}
+.solidarity-icon{font-size:2.2rem;margin-bottom:0.8rem}
+.solidarity-inner h3{
+  font-family:'Bungee',sans-serif;
+  font-size:clamp(1rem,3vw,1.4rem);
+  color:var(--cream);
+  margin-bottom:0.8rem;
+}
+.solidarity-inner p{
+  color:rgba(237,228,212,0.85);
+  font-size:0.95rem;
+  line-height:1.7;
+  max-width:600px;
+  margin:0 auto;
+}
+.solidarity-inner p strong{color:var(--copper-light)}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
   .roda-inner{grid-template-columns:1fr}
@@ -796,6 +835,16 @@ footer p{
 </section>
 
 <!-- ===== TRIBAL DIVIDER ===== -->
+
+<!-- SOLIDARITY BANNER -->
+<div class="solidarity-banner">
+  <div class="solidarity-inner">
+    <div class="solidarity-icon">🤲🏽</div>
+    <h3>Jornada Solidaria</h3>
+    <p>En este encuentro vamos a estar juntando <strong>alimentos no perecederos</strong> para la olla popular de <strong>Toque Afro San Telmo</strong>. Si podés traer algo, sumate a la movida. Entre todos hacemos comunidad.</p>
+  </div>
+</div>
+
 <div class="tribal-band"></div>
 
 <!-- ===== RODA DE TIMBAL ===== -->

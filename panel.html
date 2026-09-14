@@ -234,6 +234,61 @@ body{
   min-height:1.2em;
 }
 
+
+/* Password change */
+.pass-toggle{
+  background:none;border:none;
+  color:var(--text-muted);
+  font-size:0.8rem;
+  cursor:pointer;
+  text-decoration:underline;
+  font-family:'Nunito',sans-serif;
+  transition:color 0.3s;
+  margin-top:0.5rem;
+}
+.pass-toggle:hover{color:var(--copper)}
+.pass-form{
+  display:none;
+  max-width:300px;
+  margin:1rem auto 0;
+  background:rgba(90,21,21,0.3);
+  border:1px solid rgba(200,150,30,0.15);
+  border-radius:10px;
+  padding:1.2rem;
+}
+.pass-form.active{display:block}
+.pass-form input{
+  width:100%;
+  padding:0.6rem 0.8rem;
+  background:rgba(10,6,4,0.6);
+  border:1px solid rgba(200,150,30,0.25);
+  border-radius:6px;
+  color:var(--cream);
+  font-family:'Nunito',sans-serif;
+  font-size:0.9rem;
+  margin-bottom:0.6rem;
+  outline:none;
+}
+.pass-form input:focus{border-color:var(--copper)}
+.pass-form button{
+  width:100%;
+  padding:0.6rem;
+  background:var(--copper);
+  border:none;
+  border-radius:6px;
+  color:var(--indigo-deep);
+  font-family:'Passion One',sans-serif;
+  font-size:0.95rem;
+  cursor:pointer;
+}
+.pass-form button:disabled{opacity:0.5}
+.pass-msg{
+  font-size:0.8rem;
+  text-align:center;
+  margin-top:0.5rem;
+  min-height:1.2em;
+}
+
 /* Schedule grid */
 .schedule-grid{
   max-width:700px;
@@ -495,6 +550,14 @@ body{
   <div class="tribal-band"></div>
 
   <footer class="panel-footer">
+    <button class="pass-toggle" onclick="document.getElementById('pass-form').classList.toggle('active')">🔑 Cambiar contraseña</button>
+    <div class="pass-form" id="pass-form">
+      <input type="password" id="new-pass" placeholder="Nueva contraseña" minlength="6">
+      <input type="password" id="new-pass2" placeholder="Repetir contraseña">
+      <button onclick="changePass()">Cambiar</button>
+      <p class="pass-msg" id="pass-msg"></p>
+    </div>
+    <br>
     <a href="index.html">← Volver al sitio principal</a>
     <p style="margin-top:0.5rem">11° Encuentro de Tambores y Danza · 2026</p>
   </footer>
@@ -543,6 +606,35 @@ async function saveAssignments(){
     console.error(e);
   }
 }
+
+// Change password
+function changePass(){
+  const p1 = document.getElementById('new-pass').value;
+  const p2 = document.getElementById('new-pass2').value;
+  const msg = document.getElementById('pass-msg');
+  if(!p1 || !p2){msg.textContent='Completá ambos campos';msg.style.color='#f87171';return}
+  if(p1 !== p2){msg.textContent='Las contraseñas no coinciden';msg.style.color='#f87171';return}
+  if(p1.length < 6){msg.textContent='Mínimo 6 caracteres';msg.style.color='#f87171';return}
+  const user = auth.currentUser;
+  if(!user){msg.textContent='Error de sesión';msg.style.color='#f87171';return}
+  user.updatePassword(p1).then(()=>{
+    msg.textContent='✅ Contraseña actualizada';
+    msg.style.color='#4ade80';
+    document.getElementById('new-pass').value='';
+    document.getElementById('new-pass2').value='';
+    setTimeout(()=>{
+      document.getElementById('pass-form').classList.remove('active');
+      msg.textContent='';
+    },2000);
+  }).catch(e=>{
+    if(e.code==='auth/requires-recent-login'){
+      msg.textContent='Cerrá sesión, volvé a entrar e intentá de nuevo';
+    } else {
+      msg.textContent='❌ Error: '+e.message;
+    }
+    msg.style.color='#f87171';
+  });
+}
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js">
 // Firestore
@@ -587,6 +679,35 @@ async function saveAssignments(){
     console.error(e);
   }
 }
+
+// Change password
+function changePass(){
+  const p1 = document.getElementById('new-pass').value;
+  const p2 = document.getElementById('new-pass2').value;
+  const msg = document.getElementById('pass-msg');
+  if(!p1 || !p2){msg.textContent='Completá ambos campos';msg.style.color='#f87171';return}
+  if(p1 !== p2){msg.textContent='Las contraseñas no coinciden';msg.style.color='#f87171';return}
+  if(p1.length < 6){msg.textContent='Mínimo 6 caracteres';msg.style.color='#f87171';return}
+  const user = auth.currentUser;
+  if(!user){msg.textContent='Error de sesión';msg.style.color='#f87171';return}
+  user.updatePassword(p1).then(()=>{
+    msg.textContent='✅ Contraseña actualizada';
+    msg.style.color='#4ade80';
+    document.getElementById('new-pass').value='';
+    document.getElementById('new-pass2').value='';
+    setTimeout(()=>{
+      document.getElementById('pass-form').classList.remove('active');
+      msg.textContent='';
+    },2000);
+  }).catch(e=>{
+    if(e.code==='auth/requires-recent-login'){
+      msg.textContent='Cerrá sesión, volvé a entrar e intentá de nuevo';
+    } else {
+      msg.textContent='❌ Error: '+e.message;
+    }
+    msg.style.color='#f87171';
+  });
+}
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js">
 // Firestore
@@ -630,6 +751,35 @@ async function saveAssignments(){
     btn.disabled = false;
     console.error(e);
   }
+}
+
+// Change password
+function changePass(){
+  const p1 = document.getElementById('new-pass').value;
+  const p2 = document.getElementById('new-pass2').value;
+  const msg = document.getElementById('pass-msg');
+  if(!p1 || !p2){msg.textContent='Completá ambos campos';msg.style.color='#f87171';return}
+  if(p1 !== p2){msg.textContent='Las contraseñas no coinciden';msg.style.color='#f87171';return}
+  if(p1.length < 6){msg.textContent='Mínimo 6 caracteres';msg.style.color='#f87171';return}
+  const user = auth.currentUser;
+  if(!user){msg.textContent='Error de sesión';msg.style.color='#f87171';return}
+  user.updatePassword(p1).then(()=>{
+    msg.textContent='✅ Contraseña actualizada';
+    msg.style.color='#4ade80';
+    document.getElementById('new-pass').value='';
+    document.getElementById('new-pass2').value='';
+    setTimeout(()=>{
+      document.getElementById('pass-form').classList.remove('active');
+      msg.textContent='';
+    },2000);
+  }).catch(e=>{
+    if(e.code==='auth/requires-recent-login'){
+      msg.textContent='Cerrá sesión, volvé a entrar e intentá de nuevo';
+    } else {
+      msg.textContent='❌ Error: '+e.message;
+    }
+    msg.style.color='#f87171';
+  });
 }
 </script>
 <script>
@@ -739,6 +889,35 @@ async function saveAssignments(){
     btn.disabled = false;
     console.error(e);
   }
+}
+
+// Change password
+function changePass(){
+  const p1 = document.getElementById('new-pass').value;
+  const p2 = document.getElementById('new-pass2').value;
+  const msg = document.getElementById('pass-msg');
+  if(!p1 || !p2){msg.textContent='Completá ambos campos';msg.style.color='#f87171';return}
+  if(p1 !== p2){msg.textContent='Las contraseñas no coinciden';msg.style.color='#f87171';return}
+  if(p1.length < 6){msg.textContent='Mínimo 6 caracteres';msg.style.color='#f87171';return}
+  const user = auth.currentUser;
+  if(!user){msg.textContent='Error de sesión';msg.style.color='#f87171';return}
+  user.updatePassword(p1).then(()=>{
+    msg.textContent='✅ Contraseña actualizada';
+    msg.style.color='#4ade80';
+    document.getElementById('new-pass').value='';
+    document.getElementById('new-pass2').value='';
+    setTimeout(()=>{
+      document.getElementById('pass-form').classList.remove('active');
+      msg.textContent='';
+    },2000);
+  }).catch(e=>{
+    if(e.code==='auth/requires-recent-login'){
+      msg.textContent='Cerrá sesión, volvé a entrar e intentá de nuevo';
+    } else {
+      msg.textContent='❌ Error: '+e.message;
+    }
+    msg.style.color='#f87171';
+  });
 }
 </script>
 </body>
